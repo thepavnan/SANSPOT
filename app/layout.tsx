@@ -4,7 +4,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Statify — Spotify Tracker",
-  description: "Відстежуй свою музику. Історія та статистика прослуховувань.",
+  description: "Track your Music. Історія та статистика прослуховувань.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
