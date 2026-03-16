@@ -1,7 +1,7 @@
 // app/page.tsx
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
@@ -16,11 +16,11 @@ function Logo({ s = 32 }: { s?: number }) {
 // ── Demo Data ──────────────────────────────────────
 
 const DEMO_NP = {
-  name: "...",
-  artist: "...",
-  album: "...",
-  progress: 0.6,
-  color: "#e74c3c",  // ← додай це
+  name: "Blinding Lights",
+  artist: "The Weeknd",
+  album: "After Hours",
+  progress: 60,
+  color: "#e74c3c",
 };
 
 const DEMO_STATS = {
@@ -115,7 +115,7 @@ function DemoDashboard() {
       {/* Now Playing */}
       <div className="np">
         <div className="np-img">
-          <FakeArt color={DEMO_NP.color || "#e74c3c"} size={56} />
+          <FakeArt color={DEMO_NP.color} size={56} />
           <div className="np-dot" />
         </div>
         <div className="np-i">
@@ -226,12 +226,18 @@ function DemoDashboard() {
   );
 }
 
+// ── Error banner — окремий компонент для useSearchParams ──
+
+function ErrorBanner() {
+  const searchParams = useSearchParams();
+  const error = searchParams.get("error");
+  if (!error) return null;
+  return <div className="land-err">Помилка авторизації: {error}</div>;
+}
+
 // ── Landing Page ──
 
 export default function Home() {
-  const searchParams = useSearchParams();
-  const error = searchParams.get("error");
-
   return (
     <div className="land-page">
       {/* Hero Section */}
@@ -254,9 +260,10 @@ export default function Home() {
             Увійти через Spotify
           </Link>
 
-          {error && (
-            <div className="land-err">Помилка авторизації: {error}</div>
-          )}
+          {/* Suspense обов'язковий для useSearchParams в Next.js 14 */}
+          <Suspense fallback={null}>
+            <ErrorBanner />
+          </Suspense>
 
           <div className="pills">
             <div className="pill"><span className="pill-d" />Історія треків</div>
