@@ -16,10 +16,11 @@ function Logo({ s = 32 }: { s?: number }) {
 // ── Demo Data ──────────────────────────────────────
 
 const DEMO_NP = {
-  name: "Blinding Lights",
-  artist: "The Weeknd",
-  album: "After Hours",
-  progress: 65,
+  name: "...",
+  artist: "...",
+  album: "...",
+  progress: 0.6,
+  color: "#e74c3c",  // ← додай це
 };
 
 const DEMO_STATS = {
