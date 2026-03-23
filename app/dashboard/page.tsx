@@ -50,13 +50,13 @@ function dur(ms: number) {
 function ago(d: string) {
   const df = Date.now() - new Date(d).getTime();
   const m = Math.floor(df / 60000);
-  if (m < 1) return "щойно";
-  if (m < 60) return `${m} хв`;
+  if (m < 1) return "przed chwilą";
+  if (m < 60) return `${m} min`;
   const h = Math.floor(m / 60);
-  if (h < 24) return `${h} год`;
+  if (h < 24) return `${h} godz`;
   const days = Math.floor(h / 24);
-  if (days < 7) return `${days} дн`;
-  return new Date(d).toLocaleDateString("uk-UA", { day: "numeric", month: "short" });
+  if (days < 7) return `${days} dni`;
+  return new Date(d).toLocaleDateString("pl-PL", { day: "numeric", month: "short" });
 }
 
 export default function Dashboard() {
@@ -117,7 +117,7 @@ export default function Dashboard() {
     );
   }, [stats, q]);
 
-  if (loading) return <div className="ld"><div className="ld-r" /><span className="ld-t">Завантаження...</span></div>;
+  if (loading) return <div className="ld"><div className="ld-r" /><span className="ld-t">Ładowanie...</span></div>;
 
   return (
     <div className="dash">
@@ -128,7 +128,7 @@ export default function Dashboard() {
             {profile.image && <div className="ava"><img src={profile.image} alt="" /></div>}
             <span className="nav-n">{profile.name}</span>
           </>)}
-          <a href="/api/auth/logout" className="btn-o">Вийти</a>
+          <a href="/api/auth/logout" className="btn-o">Wyloguj</a>
         </div>
       </nav>
 
@@ -139,7 +139,7 @@ export default function Dashboard() {
             <div className="np-dot" />
           </div>
           <div className="np-i">
-            <div className="np-l">Зараз грає</div>
+            <div className="np-l">Teraz gra</div>
             <div className="np-t">{np.track.name}</div>
             <div className="np-a">{np.track.artist} — {np.track.album}</div>
             <div className="np-bar">
@@ -151,10 +151,10 @@ export default function Dashboard() {
 
       {stats && (
         <div className="stats">
-          <div className="st"><div className="st-n g">{stats.totalTracks}</div><div className="st-l">Прослухано</div></div>
-          <div className="st"><div className="st-n">{stats.totalMinutes}</div><div className="st-l">Хвилин</div></div>
-          <div className="st"><div className="st-n">{stats.uniqueArtists}</div><div className="st-l">Артистів</div></div>
-          <div className="st"><div className="st-n">{stats.uniqueTracks}</div><div className="st-l">Треків</div></div>
+          <div className="st"><div className="st-n g">{stats.totalTracks}</div><div className="st-l">Odtworzono</div></div>
+          <div className="st"><div className="st-n">{stats.totalMinutes}</div><div className="st-l">Minut</div></div>
+          <div className="st"><div className="st-n">{stats.uniqueArtists}</div><div className="st-l">Artystów</div></div>
+          <div className="st"><div className="st-n">{stats.uniqueTracks}</div><div className="st-l">Utworów</div></div>
         </div>
       )}
 
@@ -165,7 +165,7 @@ export default function Dashboard() {
           <input
             className="srch-in"
             type="text"
-            placeholder="Пошук по трекам, артистам, альбомам..."
+            placeholder="Szukaj po utworach, artystach, albumach..."
             value={query}
             onChange={e => setQuery(e.target.value)}
           />
@@ -175,9 +175,9 @@ export default function Dashboard() {
         </div>
         {q && (
           <span className="srch-cnt">
-            {tab === "history" ? `${filteredItems.length} з ${items.length}` :
-             tab === "artists" ? `${filteredArtists.length} з ${stats?.topArtists.length || 0}` :
-             `${filteredTracks.length} з ${stats?.topTracks.length || 0}`}
+            {tab === "history" ? `${filteredItems.length} z ${items.length}` :
+             tab === "artists" ? `${filteredArtists.length} z ${stats?.topArtists.length || 0}` :
+             `${filteredTracks.length} z ${stats?.topTracks.length || 0}`}
           </span>
         )}
       </div>
@@ -186,7 +186,7 @@ export default function Dashboard() {
       <div className="tabs">
         {(["history", "artists", "tracks"] as const).map(t => (
           <button key={t} className={`tb ${tab === t ? "on" : ""}`} onClick={() => setTab(t)}>
-            {t === "history" ? "Історія" : t === "artists" ? "Топ артисти" : "Топ треки"}
+            {t === "history" ? "Historia" : t === "artists" ? "Top artyści" : "Top utwory"}
           </button>
         ))}
       </div>
@@ -194,7 +194,7 @@ export default function Dashboard() {
       {/* Artists */}
       {tab === "artists" && (
         <div>
-          <div className="sh"><h2 className="sh-t">Топ артисти</h2><span className="sh-s">за останні 50 треків</span></div>
+          <div className="sh"><h2 className="sh-t">Top artyści</h2><span className="sh-s">z ostatnich 50 utworów</span></div>
           {filteredArtists.length ? (
             <div className="tsc">
               {filteredArtists.map((a, i) => (
@@ -202,7 +202,7 @@ export default function Dashboard() {
                   <div className={`tc-r ${i === 0 && !q ? "f" : ""}`}>{i + 1}</div>
                   <div className="tc-img circ">{a.image && <img src={a.image} alt={a.name} />}</div>
                   <div className="tc-n">{a.name}</div>
-                  <div className="tc-s">{a.count} треків</div>
+                  <div className="tc-s">{a.count} utworów</div>
                 </div>
               ))}
             </div>
@@ -213,7 +213,7 @@ export default function Dashboard() {
       {/* Tracks */}
       {tab === "tracks" && (
         <div>
-          <div className="sh"><h2 className="sh-t">Топ треки</h2><span className="sh-s">найчастіше прослуховувані</span></div>
+          <div className="sh"><h2 className="sh-t">Top utwory</h2><span className="sh-s">najczęściej odtwarzane</span></div>
           {filteredTracks.length ? (
             <div className="tsc">
               {filteredTracks.map((t, i) => (
@@ -233,9 +233,9 @@ export default function Dashboard() {
       {tab === "history" && (
         <div>
           <div className="sh">
-            <h2 className="sh-t">Остання активність</h2>
+            <h2 className="sh-t">Ostatnia aktywność</h2>
             <button className={`btn-r ${spin ? "sp" : ""}`} onClick={() => load(true)} disabled={spin}>
-              <RefreshSvg />{spin ? "..." : "Оновити"}
+              <RefreshSvg />{spin ? "..." : "Odśwież"}
             </button>
           </div>
           {filteredItems.length ? (
@@ -257,8 +257,8 @@ export default function Dashboard() {
           ) : (
             <div className="ey">
               <div className="ey-ic">{q ? "🔍" : "🎧"}</div>
-              <div className="ey-t">{q ? "Нічого не знайдено" : "Історія порожня"}</div>
-              <div className="ey-s">{q ? "Спробуй інший запит" : "Послухай щось у Spotify — треки з'являться тут"}</div>
+              <div className="ey-t">{q ? "Nic nie znaleziono" : "Historia jest pusta"}</div>
+              <div className="ey-s">{q ? "Spróbuj innego zapytania" : "Posłuchaj czegoś w Spotify — utwory pojawią się tutaj"}</div>
             </div>
           )}
         </div>
@@ -271,8 +271,8 @@ function NoResults({ hasQuery, icon }: { hasQuery: boolean; icon: string }) {
   return (
     <div className="ey">
       <div className="ey-ic">{hasQuery ? "🔍" : icon}</div>
-      <div className="ey-t">{hasQuery ? "Нічого не знайдено" : "Поки немає даних"}</div>
-      {hasQuery && <div className="ey-s">Спробуй інший запит</div>}
+      <div className="ey-t">{hasQuery ? "Nic nie znaleziono" : "Brak danych"}</div>
+      {hasQuery && <div className="ey-s">Spróbuj innego zapytania</div>}
     </div>
   );
 }

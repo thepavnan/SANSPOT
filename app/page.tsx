@@ -49,14 +49,14 @@ const DEMO_TRACKS = [
 ];
 
 const DEMO_HISTORY = [
-  { track: "Blinding Lights", artist: "The Weeknd", album: "After Hours", dur: "3:20", time: "2 хв", color: "#e74c3c" },
-  { track: "Levitating", artist: "Dua Lipa", album: "Future Nostalgia", dur: "3:23", time: "6 хв", color: "#e91e8a" },
-  { track: "Save Your Tears", artist: "The Weeknd", album: "After Hours", dur: "3:35", time: "10 хв", color: "#e74c3c" },
-  { track: "One Dance", artist: "Drake", album: "Views", dur: "2:53", time: "14 хв", color: "#3498db" },
-  { track: "HUMBLE.", artist: "Kendrick Lamar", album: "DAMN.", dur: "2:57", time: "17 хв", color: "#f39c12" },
-  { track: "As It Was", artist: "Harry Styles", album: "Harry's House", dur: "2:47", time: "20 хв", color: "#2ecc71" },
-  { track: "Kill Bill", artist: "SZA", album: "SOS", dur: "2:33", time: "23 хв", color: "#9b59b6" },
-  { track: "Starboy", artist: "The Weeknd", album: "Starboy", dur: "3:50", time: "27 хв", color: "#e74c3c" },
+  { track: "Blinding Lights", artist: "The Weeknd", album: "After Hours", dur: "3:20", time: "2 min", color: "#e74c3c" },
+  { track: "Levitating", artist: "Dua Lipa", album: "Future Nostalgia", dur: "3:23", time: "6 min", color: "#e91e8a" },
+  { track: "Save Your Tears", artist: "The Weeknd", album: "After Hours", dur: "3:35", time: "10 min", color: "#e74c3c" },
+  { track: "One Dance", artist: "Drake", album: "Views", dur: "2:53", time: "14 min", color: "#3498db" },
+  { track: "HUMBLE.", artist: "Kendrick Lamar", album: "DAMN.", dur: "2:57", time: "17 min", color: "#f39c12" },
+  { track: "As It Was", artist: "Harry Styles", album: "Harry's House", dur: "2:47", time: "20 min", color: "#2ecc71" },
+  { track: "Kill Bill", artist: "SZA", album: "SOS", dur: "2:33", time: "23 min", color: "#9b59b6" },
+  { track: "Starboy", artist: "The Weeknd", album: "Starboy", dur: "3:50", time: "27 min", color: "#e74c3c" },
 ];
 
 // ── Fake album art placeholder ──
@@ -108,7 +108,7 @@ function DemoDashboard() {
             <span style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "100%", height: "100%", fontSize: ".8rem", fontWeight: 700 }}>D</span>
           </div>
           <span className="nav-n">Demo User</span>
-          <span className="btn-o" style={{ pointerEvents: "none", opacity: 0.5 }}>Вийти</span>
+          <span className="btn-o" style={{ pointerEvents: "none", opacity: 0.5 }}>Wyloguj</span>
         </div>
       </div>
 
@@ -119,7 +119,7 @@ function DemoDashboard() {
           <div className="np-dot" />
         </div>
         <div className="np-i">
-          <div className="np-l">Зараз грає</div>
+          <div className="np-l">Teraz gra</div>
           <div className="np-t">{DEMO_NP.name}</div>
           <div className="np-a">{DEMO_NP.artist} — {DEMO_NP.album}</div>
           <div className="np-bar"><div className="np-fill" style={{ width: `${DEMO_NP.progress}%` }} /></div>
@@ -128,17 +128,17 @@ function DemoDashboard() {
 
       {/* Stats */}
       <div className="stats">
-        <div className="st"><div className="st-n g">{DEMO_STATS.totalTracks}</div><div className="st-l">Прослухано</div></div>
-        <div className="st"><div className="st-n">{DEMO_STATS.totalMinutes}</div><div className="st-l">Хвилин</div></div>
-        <div className="st"><div className="st-n">{DEMO_STATS.uniqueArtists}</div><div className="st-l">Артистів</div></div>
-        <div className="st"><div className="st-n">{DEMO_STATS.uniqueTracks}</div><div className="st-l">Треків</div></div>
+        <div className="st"><div className="st-n g">{DEMO_STATS.totalTracks}</div><div className="st-l">Odtworzono</div></div>
+        <div className="st"><div className="st-n">{DEMO_STATS.totalMinutes}</div><div className="st-l">Minut</div></div>
+        <div className="st"><div className="st-n">{DEMO_STATS.uniqueArtists}</div><div className="st-l">Artystów</div></div>
+        <div className="st"><div className="st-n">{DEMO_STATS.uniqueTracks}</div><div className="st-l">Utworów</div></div>
       </div>
 
       {/* Search */}
       <div className="srch">
         <div className="srch-box">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
-          <input className="srch-in" type="text" placeholder="Пошук по трекам, артистам, альбомам..." value={demoQuery} onChange={e => setDemoQuery(e.target.value)} />
+          <input className="srch-in" type="text" placeholder="Szukaj po utworach, artystach, albumach..." value={demoQuery} onChange={e => setDemoQuery(e.target.value)} />
           {demoQuery && (
             <button className="srch-x" onClick={() => setDemoQuery("")}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18M6 6l12 12" /></svg>
@@ -146,9 +146,9 @@ function DemoDashboard() {
           )}
         </div>
         {dq && <span className="srch-cnt">
-          {demoTab === "history" ? `${fHistory.length} з ${DEMO_HISTORY.length}` :
-           demoTab === "artists" ? `${fArtists.length} з ${DEMO_ARTISTS.length}` :
-           `${fTracks.length} з ${DEMO_TRACKS.length}`}
+          {demoTab === "history" ? `${fHistory.length} z ${DEMO_HISTORY.length}` :
+           demoTab === "artists" ? `${fArtists.length} z ${DEMO_ARTISTS.length}` :
+           `${fTracks.length} z ${DEMO_TRACKS.length}`}
         </span>}
       </div>
 
@@ -156,7 +156,7 @@ function DemoDashboard() {
       <div className="tabs">
         {(["history", "artists", "tracks"] as const).map(t => (
           <button key={t} className={`tb ${demoTab === t ? "on" : ""}`} onClick={() => setDemoTab(t)}>
-            {t === "history" ? "Історія" : t === "artists" ? "Топ артисти" : "Топ треки"}
+            {t === "history" ? "Historia" : t === "artists" ? "Top artyści" : "Top utwory"}
           </button>
         ))}
       </div>
@@ -164,7 +164,7 @@ function DemoDashboard() {
       {/* Artists */}
       {demoTab === "artists" && (
         <div>
-          <div className="sh"><h2 className="sh-t">Топ артисти</h2></div>
+          <div className="sh"><h2 className="sh-t">Top artyści</h2></div>
           {fArtists.length ? (
             <div className="tsc">
               {fArtists.map((a, i) => (
@@ -172,18 +172,18 @@ function DemoDashboard() {
                   <div className={`tc-r ${i === 0 && !dq ? "f" : ""}`}>{i + 1}</div>
                   <div className="tc-img circ"><FakeArt color={a.color} size={120} round /></div>
                   <div className="tc-n">{a.name}</div>
-                  <div className="tc-s">{a.count} треків</div>
+                  <div className="tc-s">{a.count} utworów</div>
                 </div>
               ))}
             </div>
-          ) : <div className="ey"><div className="ey-ic">🔍</div><div className="ey-t">Нічого не знайдено</div></div>}
+          ) : <div className="ey"><div className="ey-ic">🔍</div><div className="ey-t">Nic nie znaleziono</div></div>}
         </div>
       )}
 
       {/* Tracks */}
       {demoTab === "tracks" && (
         <div>
-          <div className="sh"><h2 className="sh-t">Топ треки</h2></div>
+          <div className="sh"><h2 className="sh-t">Top utwory</h2></div>
           {fTracks.length ? (
             <div className="tsc">
               {fTracks.map((t, i) => (
@@ -195,14 +195,14 @@ function DemoDashboard() {
                 </div>
               ))}
             </div>
-          ) : <div className="ey"><div className="ey-ic">🔍</div><div className="ey-t">Нічого не знайдено</div></div>}
+          ) : <div className="ey"><div className="ey-ic">🔍</div><div className="ey-t">Nic nie znaleziono</div></div>}
         </div>
       )}
 
       {/* History */}
       {demoTab === "history" && (
         <div>
-          <div className="sh"><h2 className="sh-t">Остання активність</h2></div>
+          <div className="sh"><h2 className="sh-t">Ostatnia aktywność</h2></div>
           {fHistory.length ? (
             <div className="hl">
               {fHistory.map((h, i) => (
@@ -219,20 +219,20 @@ function DemoDashboard() {
                 </div>
               ))}
             </div>
-          ) : <div className="ey"><div className="ey-ic">🔍</div><div className="ey-t">Нічого не знайдено</div></div>}
+          ) : <div className="ey"><div className="ey-ic">🔍</div><div className="ey-t">Nic nie znaleziono</div></div>}
         </div>
       )}
     </div>
   );
 }
 
-// ── Error banner — окремий компонент для useSearchParams ──
+// ── Error banner ──
 
 function ErrorBanner() {
   const searchParams = useSearchParams();
   const error = searchParams.get("error");
   if (!error) return null;
-  return <div className="land-err">Помилка авторизації: {error}</div>;
+  return <div className="land-err">Błąd autoryzacji: {error}</div>;
 }
 
 // ── Landing Page ──
@@ -248,27 +248,26 @@ export default function Home() {
         <div className="land-c">
           <div className="land-icon"><Logo s={32} /></div>
 
-          <h1>Твоя музика.<br /><span className="gr">Твоя історія.</span></h1>
+          <h1>Twoja muzyka.<br /><span className="gr">Twoja historia.</span></h1>
 
           <p className="land-p">
-            Підключи Spotify і відстежуй кожен трек.
-            Дивись статистику, топ артистів та повну історію прослуховувань.
+            Połącz Spotify i śledź każdy utwór.
+            Sprawdzaj statystyki, topowych artystów i pełną historię odtworzeń.
           </p>
 
           <Link href="/api/auth/login" className="btn-go">
             <Logo s={20} />
-            Увійти через Spotify
+            Zaloguj przez Spotify
           </Link>
 
-          {/* Suspense обов'язковий для useSearchParams в Next.js 14 */}
           <Suspense fallback={null}>
             <ErrorBanner />
           </Suspense>
 
           <div className="pills">
-            <div className="pill"><span className="pill-d" />Історія треків</div>
-            <div className="pill"><span className="pill-d" />Топ артисти</div>
-            <div className="pill"><span className="pill-d" />Пошук</div>
+            <div className="pill"><span className="pill-d" />Historia utworów</div>
+            <div className="pill"><span className="pill-d" />Top artyści</div>
+            <div className="pill"><span className="pill-d" />Wyszukiwanie</div>
           </div>
         </div>
       </section>
@@ -276,8 +275,8 @@ export default function Home() {
       {/* Demo Section */}
       <section className="demo-section">
         <div className="demo-header">
-          <h2 className="demo-title">Подивись як це працює</h2>
-          <p className="demo-sub">Інтерактивне демо з штучними даними. Увійди через Spotify щоб побачити свої.</p>
+          <h2 className="demo-title">Zobacz jak to działa</h2>
+          <p className="demo-sub">Interaktywne demo z przykładowymi danymi. Zaloguj przez Spotify, aby zobaczyć swoje.</p>
         </div>
         <div className="demo-frame">
           <div className="demo-dots">
@@ -289,10 +288,10 @@ export default function Home() {
 
       {/* CTA */}
       <section className="cta-section">
-        <h2 className="cta-title">Готовий побачити <span className="gr">свою</span> статистику?</h2>
+        <h2 className="cta-title">Gotowy zobaczyć <span className="gr">swoje</span> statystyki?</h2>
         <Link href="/api/auth/login" className="btn-go">
           <Logo s={20} />
-          Підключити Spotify
+          Połącz Spotify
         </Link>
       </section>
     </div>

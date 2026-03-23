@@ -4,12 +4,12 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Statify — Spotify Tracker",
-  description: "Track your Music. Історія та статистика прослуховувань.",
+  description: "Śledź swoją muzykę. Historia i statystyki odtworzeń.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="uk">
+    <html lang="pl">
       <body>{children}</body>
     </html>
   );
